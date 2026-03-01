@@ -1,0 +1,130 @@
+:root {
+  --color-signal: #ff4500;
+  --color-ink: #111111;
+  --color-paper: #ffffff;
+}
+
+/* TYPOGRAPHY */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  cursor: none;
+  /* Hide default cursor for custom follower */
+  overflow-x: hidden;
+}
+
+.font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-sans {
+  font-family: 'Inter', sans-serif;
+}
+
+/* CURSOR SYSTEM */
+#cursor-follower {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-signal);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition:
+    transform 0.1s ease,
+    width 0.3s ease,
+    height 0.3s ease,
+    background-color 0.3s ease;
+  mix-blend-mode: difference;
+}
+
+#cursor-follower.hover-active {
+  width: 64px;
+  height: 64px;
+  background-color: white;
+  mix-blend-mode: difference;
+}
+
+/* PARALLAX & ANIMATIONS */
+.parallax-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.parallax-img {
+  width: 100%;
+  height: 120%;
+  /* Taller for parallax room */
+  object-fit: cover;
+  will-change: transform;
+  transition: filter 0.5s ease;
+}
+
+/* Grayscale to Color Interaction */
+.interactive-visual .parallax-img {
+  filter: grayscale(100%);
+}
+
+.interactive-visual:hover .parallax-img {
+  filter: grayscale(0%);
+}
+
+/* UTILITIES */
+.selection-orange::selection {
+  background-color: var(--color-signal);
+  color: white;
+}
+
+/* PROFILE MODAL TRANSITIONS */
+#profile-modal {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+#profile-trigger:hover + #profile-modal,
+#profile-modal:hover {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* VIEW TRANSITIONS */
+.view-section {
+  display: none;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.view-section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sticky Navigation Transition */
+nav {
+  transition:
+    padding 0.3s ease,
+    background-color 0.3s ease;
+}
+
+nav.scrolled {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
